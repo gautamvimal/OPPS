@@ -12,16 +12,17 @@ class Student {
         }
 
         //Parameterized constructor
-        Student(int id, string name, int age, int nos){
+        Student(int id, string name, int age, int nos, float gpa){
             cout<<this->name<<" calling default constructor"<<endl;
             this->id = id;
             this->name = name;
             this->age = age;
             this->nos = nos;
+            this->gpa = new float(gpa); 
         }
 
          //Copy constructor
-        Student(const Student &srcobj){
+        Student(const Student &srcobj){ // scrobj => object A,B or any object we create
             cout<<this->name<<" calling default constructor"<<endl;
             this->id = srcobj.id;
             this->name = srcobj.name;
@@ -35,6 +36,7 @@ class Student {
         int age;
         string name;
         int nos;
+        float *gpa;
 
         //Behaviour
         void study(){
@@ -52,6 +54,7 @@ class Student {
         //destructor
         ~Student(){
             cout<<this->name<<" calling default destructor"<<endl;
+            delete this-> gpa;
         }
 
 };
@@ -89,18 +92,19 @@ int main(){
 
 
     //Dyanmic allocation
-    Student *A = new Student(1,"vimal",19,5);
+    Student *A = new Student(1,"vimal",19,5,9.4);
     cout<<A->name<<endl;
-    cout<<A->age<<endl;
+    // cout<<A->age<<endl;
+    cout<<*(A->gpa)<<endl;
     A->study();
   
-    Student *B = new Student(2,"Deepak",23,4);
-    cout<<B->name<<endl;
-    cout<<B->age<<endl;
-    B->study();
+    // Student *B = new Student(2,"Deepak",23,4);
+    // cout<<B->name<<endl;
+    // cout<<B->age<<endl;
+    // B->study();
 
     delete A;//we need to delete it manually bcz its in dynamic memory,... before it was in stack so destructor call itself
-    delete B;
+    // delete B;
 
 
     return 0;
